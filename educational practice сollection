@@ -50,13 +50,14 @@ namespace study
                 sw.WriteLine(victim);
             }
         }
-        public void print()
-        {
-            foreach(T el in collection)
-            {
-                Console.WriteLine(el);
-            }
-        }
+    //    public void print()
+    //    {
+    //        foreach(T el in collection)
+   //         {
+      ///          Console.WriteLine(el);
+       //     }
+     //   }
+     //new one changed part
         public void sort_by()
         {
             Type t = typeof(T);
