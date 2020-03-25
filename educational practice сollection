@@ -1,25 +1,36 @@
-//using SyStem;
-//using System;
-//using System.Collections.Generic;
-//using System.Reflection;
-//using System.IO;
-//using System.Linq;
+using SyStem;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.IO;
+using System.Linq;
 
 namespace study
 {
     class Collection<T>
     {
         List<T> collection = new List<T>();
+        
+        
+        
+        
         public int len()
         {
             return collection.Count;
         }
         public void find_by(string key)
+        
+        
+        //new ine comment
         {
             Type t = typeof(T);
+            
             PropertyInfo[] properties = t.GetProperties();
             bool found = false;
+            
             foreach(T el in collection)
+            
+            
             {
                 foreach(PropertyInfo property in properties)
                 {
@@ -29,7 +40,11 @@ namespace study
                         found = true;
                         break;
                     }
+                    
+                    
                 }
+                
+                //one more
             }
             if (!found)
             {
