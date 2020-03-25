@@ -1,9 +1,9 @@
-using SyStem;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.IO;
-using System.Linq;
+//using SyStem;
+//using System;
+//using System.Collections.Generic;
+//using System.Reflection;
+//using System.IO;
+//using System.Linq;
 
 namespace study
 {
