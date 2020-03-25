@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.IO;
+using System.Linq;
+
+namespace study
+{
+    class Collection<T>
+    {
+        List<T> collection = new List<T>();
+        public int len()
+        {
+            return collection.Count;
+        }
+        public void find_by(string key)
+        {
+            Type t = typeof(T);
+            PropertyInfo[] properties = t.GetProperties();
+            bool found = false;
+            foreach(T el in collection)
+            {
+                foreach(PropertyInfo property in properties)
+                {
+                    if(Convert.ToString(property.GetValue(el)).Contains(key))
+                    {
+                        Console.WriteLine(el);
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found)
+            {
+                Console.WriteLine("There is no account with this information");
+            }
+        }
+        //перевірка чи існує в колекції елемент із таким же номером рахунку!!!
+        public void Add_item(T elem)
+        {
+            collection.Add(elem);
+        }
+        public void delete_by(int key, string file_name)
+        {
+            T victim = collection[key];
+            collection.RemoveAt(key);  
+            using (StreamWriter sw = File.AppendText(file_name))
+            {
+                sw.WriteLine(victim);
+            }
+        }
+        public void print()
+        {
+            foreach(T el in collection)
+            {
+                Console.WriteLine(el);
+            }
+        }
+        public void sort_by()
+        {
+            Type t = typeof(T);
+            Console.WriteLine(t);
+            PropertyInfo[] properties = t.GetProperties();
+            Console.WriteLine("By which value you want to sort:");
+            int n = 1;
+            foreach(PropertyInfo property in properties)
+            {
+                Console.WriteLine($"{n}. {property.Name}");
+                n++;
+            }
+            int key = study.Program.inp_k(properties.Length);
+            List<T> res = (from i in collection orderby properties[key - 1].GetValue(i) select i).ToList();
+            collection = res;
+        }
+        public void edit(int key, string file_name)
+        {
+            Console.WriteLine("What data you want to edit: ");
+            string what = Console.ReadLine();
+            Console.WriteLine("What data you want to write instead: ");
+            string to = Console.ReadLine();
+            Type t = typeof(T);
+            PropertyInfo[] properties = t.GetProperties();
+            foreach(T el in collection)
+            {
+                foreach(PropertyInfo property in properties)
+                {
+                    if(Convert.ToString(property.GetValue(el)).Contains(what))
+                    {
+                        property.SetValue(el, to);
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine("There are no element with this information");
+        }
+    }
+}
